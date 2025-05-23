@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+
+{% block title %}{{ profile.first_name }} {{ profile.last_name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="row g-0">
+                <div class="col-auto d-flex flex-column align-items-center justify-content-center p-3">
+                    {% if profile.photo %}
+                    <img src="{{ profile.photo }}" class="img-fluid img-thumbnail" style="object-fit: cover; max-height: 400px;" alt="{{ profile.first_name }} {{ profile.last_name }}">
+                    {% else %}
+                    <div class="bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 100%; min-height: 200px;">
+                    No Image
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{ profile.first_name }} {{ profile.last_name }}</h5>
+                    <p class="card-text"><strong>Gender:</strong> {{ profile.gender|capfirst }}</p>
+                    <p class="card-text"><strong>Email:</strong> {{ profile.email }}</p>
+                    <p class="card-text"><strong>Phone:</strong> {{ profile.phone }}</p>
+                    <p class="card-text"><strong>Location:</strong> {{ profile.location }}</p>
+                    <a href="{% url 'users:profile_list' %}" class="btn btn-secondary mt-3">Back to List</a>
+                    <a href="{% url 'users:random_profile' %}" class="btn btn-info mt-3">View Random Profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
